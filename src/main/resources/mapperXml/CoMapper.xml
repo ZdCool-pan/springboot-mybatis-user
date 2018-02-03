@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinosoft.mapper.CoMapper" >
+  <resultMap id="BaseResultMap" type="com.sinosoft.pojo.Co" >
+    <id column="co_id" property="coId" jdbcType="VARCHAR" />
+    <result column="co_name" property="coName" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    co_id, co_name, address, tel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from co
+    where co_id = #{coId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from co
+    where co_id = #{coId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinosoft.pojo.Co" >
+    insert into co (co_id, co_name, address, 
+      tel)
+    values (#{coId,jdbcType=VARCHAR}, #{coName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinosoft.pojo.Co" >
+    insert into co
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="coId != null" >
+        co_id,
+      </if>
+      <if test="coName != null" >
+        co_name,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="coId != null" >
+        #{coId,jdbcType=VARCHAR},
+      </if>
+      <if test="coName != null" >
+        #{coName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.pojo.Co" >
+    update co
+    <set >
+      <if test="coName != null" >
+        co_name = #{coName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where co_id = #{coId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.pojo.Co" >
+    update co
+    set co_name = #{coName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR}
+    where co_id = #{coId,jdbcType=VARCHAR}
+  </update>
+</mapper>

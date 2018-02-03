@@ -1,0 +1,46 @@
+# 主数据库
+spring.datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pan
+    username: root
+    password: pan123456
+
+    filters: stat
+    maxActive: 3
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 600000
+    minEvictableIdleTimeMillis: 300000
+
+# 其他数据库
+custom.datasource:
+    names: ds1
+    ds1.type: com.alibaba.druid.pool.DruidDataSource
+    ds1.driverClassName: com.mysql.jdbc.Driver
+    ds1.url: jdbc:mysql://localhost:3306/pan
+    ds1.username: root
+    ds1.password: pan123456
+
+    ds1.filters: stat
+    ds1.maxActive: 2
+    ds1.initialSize: 1
+    ds1.maxWait: 60000
+    ds1.minIdle: 1
+    ds1.timeBetweenEvictionRunsMillis: 60000
+    ds1.minEvictableIdleTimeMillis: 300000
+
+#JPA Configuration:
+#spring.jpa.show-sql: true
+
+mybatis:
+    mapper-locations: classpath:mapperXml/*.xml
+    type-aliases-package: com.sinosoft.pojo
+
+#pagehelper分页插件
+#pagehelper:
+#    helperDialect: mysql
+#    reasonable: true
+#    supportMethodsArguments: true
+#    params: count=countSql

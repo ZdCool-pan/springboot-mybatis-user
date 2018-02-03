@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sinosoft.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.sinosoft.pojo.User" >
+    <id column="UserID" property="userid" jdbcType="VARCHAR" />
+    <result column="UserName" property="username" jdbcType="VARCHAR" />
+    <result column="UserPWD" property="userpwd" jdbcType="VARCHAR" />
+    <result column="CreateDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    UserID, UserName, UserPWD, CreateDate, Phone
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sinosoft.pojo.User" >
+    insert into user (UserID, UserName, UserPWD, 
+      CreateDate, Phone)
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userpwd,jdbcType=VARCHAR}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{phone,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sinosoft.pojo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        UserID,
+      </if>
+      <if test="username != null" >
+        UserName,
+      </if>
+      <if test="userpwd != null" >
+        UserPWD,
+      </if>
+      <if test="createdate != null" >
+        CreateDate,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpwd != null" >
+        #{userpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sinosoft.pojo.User" >
+    update user
+    <set >
+      <if test="username != null" >
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpwd != null" >
+        UserPWD = #{userpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sinosoft.pojo.User" >
+    update user
+    set UserName = #{username,jdbcType=VARCHAR},
+      UserPWD = #{userpwd,jdbcType=VARCHAR},
+      CreateDate = #{createdate,jdbcType=TIMESTAMP},
+      Phone = #{phone,jdbcType=VARCHAR}
+    where UserID = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>
